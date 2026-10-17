@@ -195,89 +195,46 @@
           <h2>Serviços com <span class="gradient-text">Valores Transparentes</span></h2>
           <p>
             Sem orçamentos misteriosos. Aqui você sabe exatamente quanto custa cada cuidado para o modelo do seu carro do dia a dia.
-          </p>
-        </div>
+        <!-- Sistema de Preços 100% Organizado e Responsivo -->
+        <div class="pricing-app-container">
+          <!-- Seletor de Veículo em Grid 2x2 Elegante -->
+          <div class="pricing-vehicle-selector">
+            <button type="button" class="vehicle-pill-btn active" data-vehicle="hatch" onclick="selectPricingVehicle('hatch')">
+              <span class="pill-emoji">🚗</span>
+              <div class="pill-info">
+                <strong>Hatch / Compacto</strong>
+                <small>Onix, Polo, HB20, Argo</small>
+              </div>
+            </button>
 
-        <!-- Tabela Comparativa de Preços por Categoria de Veículo -->
-        <div class="pricing-table-card">
-          <div class="table-responsive">
-            <table class="pricing-table">
-              <thead>
-                <tr>
-                  <th>Procedimento / Serviço</th>
-                  <th>Hatch / Compacto<br><small style="color: var(--text-muted); font-size: 0.75rem; text-transform: none;">Onix, Polo, HB20, Argo</small></th>
-                  <th>Sedan / Perua<br><small style="color: var(--text-muted); font-size: 0.75rem; text-transform: none;">Corolla, Virtus, Cronos, Civic</small></th>
-                  <th class="col-highlight">SUV Compacto/Médio<br><small style="color: var(--text-muted); font-size: 0.75rem; text-transform: none;">T-Cross, Kicks, Tracker, Compass</small></th>
-                  <th>Picape / Grande<br><small style="color: var(--text-muted); font-size: 0.75rem; text-transform: none;">Strada, Toro, Hilux, Saveiro</small></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <span class="service-name">Lavagem Detalhada LRX</span>
-                    <span class="service-desc">Snow foam, caixas de roda, limpeza de borrachas, cera protetora e pretinho hidrofóbico</span>
-                  </td>
-                  <td class="service-price">R$ 89,90</td>
-                  <td class="service-price">R$ 109,90</td>
-                  <td class="service-price highlight">R$ 129,90</td>
-                  <td class="service-price">R$ 149,90</td>
-                </tr>
+            <button type="button" class="vehicle-pill-btn" data-vehicle="sedan" onclick="selectPricingVehicle('sedan')">
+              <span class="pill-emoji">🚘</span>
+              <div class="pill-info">
+                <strong>Sedan / Perua</strong>
+                <small>Corolla, Civic, Virtus, Cronos</small>
+              </div>
+            </button>
 
-                <tr>
-                  <td>
-                    <span class="service-name">Lavagem Técnica de Motor</span>
-                    <span class="service-desc">Limpeza detalhada a vapor e pincelamento, com verniz protetor anti-ressecamento</span>
-                  </td>
-                  <td class="service-price">R$ 110,00</td>
-                  <td class="service-price">R$ 120,00</td>
-                  <td class="service-price highlight">R$ 130,00</td>
-                  <td class="service-price">R$ 140,00</td>
-                </tr>
+            <button type="button" class="vehicle-pill-btn" data-vehicle="suv" onclick="selectPricingVehicle('suv')">
+              <span class="pill-emoji">🚙</span>
+              <div class="pill-info">
+                <strong>SUV Médio</strong>
+                <small>T-Cross, Tracker, Compass, Creta</small>
+              </div>
+            </button>
 
-                <tr>
-                  <td>
-                    <span class="service-name">Higienização Interna & Oxi-Sanitização</span>
-                    <span class="service-desc">Extração profunda de estofados/bancos, portas, teto, carpete e eliminação de ácaros e odores</span>
-                  </td>
-                  <td class="service-price">R$ 210,00</td>
-                  <td class="service-price">R$ 240,00</td>
-                  <td class="service-price highlight">R$ 270,00</td>
-                  <td class="service-price">R$ 310,00</td>
-                </tr>
+            <button type="button" class="vehicle-pill-btn" data-vehicle="pickup" onclick="selectPricingVehicle('pickup')">
+              <span class="pill-emoji">🛻</span>
+              <div class="pill-info">
+                <strong>Picape / SUV Grande</strong>
+                <small>Strada, Toro, Hilux, Saveiro</small>
+              </div>
+            </button>
+          </div>
 
-                <tr>
-                  <td>
-                    <span class="service-name">Revitalização & Cristalização de Faróis (Par)</span>
-                    <span class="service-desc">Remoção de amarelado e opacidade com lixamento técnico e aplicação de verniz UV</span>
-                  </td>
-                  <td class="service-price" colspan="4" style="text-align: center; font-weight: 800; color: #ff3b4b;">
-                    Preço Único: R$ 139,90 <span style="font-size: 0.82rem; font-weight: normal; color: var(--text-muted);">(o par para qualquer categoria)</span>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>
-                    <span class="service-name">Polimento Técnico Comercial</span>
-                    <span class="service-desc">Eliminação de micro-riscos, teias de aranha e devolução do brilho original com selante de 6 meses</span>
-                  </td>
-                  <td class="service-price">R$ 370,00</td>
-                  <td class="service-price">R$ 440,00</td>
-                  <td class="service-price highlight">R$ 490,00</td>
-                  <td class="service-price">R$ 580,00</td>
-                </tr>
-
-                <tr>
-                  <td>
-                    <span class="service-name">Vitrificação Cerâmica de Pintura</span>
-                    <span class="service-desc">Camada de vidro cerâmica 9H que protege contra sol, fezes de pássaros e sujeira pesada (Garantia de 1 a 2 anos)</span>
-                  </td>
-                  <td class="service-price">R$ 690,00</td>
-                  <td class="service-price">R$ 790,00</td>
-                  <td class="service-price highlight">R$ 890,00</td>
-                  <td class="service-price">R$ 990,00</td>
-                </tr>
-              </tbody>
-            </table>
+          <!-- Lista de Serviços Formatada e Organizada (Sem Tabela Cortada) -->
+          <div class="pricing-cards-list" id="pricing-services-list">
+            <!-- Renderizado dinamicamente via JS com design 100% responsivo -->
           </div>
         </div>
 

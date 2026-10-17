@@ -793,13 +793,207 @@ img {
 }
 
 /* ==========================================================================
-   TABELA DE SERVIÇOS & VALORES TRANSPARENTES
+   PROTEÇÃO GLOBAL CONTRA CÓPIA
+   ========================================================================== */
+body, * {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+
+/* ==========================================================================
+   SISTEMA DE SERVIÇOS 100% RESPONSIVO (MOBILE CARDS & DESKTOP TABLE)
    ========================================================================== */
 .services-section {
   padding: clamp(60px, 8vw, 95px) 0;
   background: rgba(12, 14, 20, 0.6);
   border-top: 1px solid var(--border-subtle);
   border-bottom: 1px solid var(--border-subtle);
+}
+
+/* ==========================================================================
+   SISTEMA DE SERVIÇOS 100% RESPONSIVO (CARDS EM LISTA MODERNA)
+   ========================================================================== */
+.services-section {
+  padding: clamp(60px, 8vw, 95px) 0;
+  background: rgba(12, 14, 20, 0.6);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.pricing-app-container {
+  max-width: 1080px;
+  margin: 0 auto 50px auto;
+}
+
+/* Seletor 2x2 no Celular, 4 Colunas no Desktop */
+.pricing-vehicle-selector {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.vehicle-pill-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: left;
+}
+
+.vehicle-pill-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.vehicle-pill-btn.active {
+  background: rgba(255, 38, 56, 0.14);
+  border-color: var(--red-primary);
+  box-shadow: 0 0 20px var(--red-glow);
+}
+
+.vehicle-pill-btn .pill-emoji {
+  font-size: 1.8rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.vehicle-pill-btn .pill-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.vehicle-pill-btn .pill-info strong {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  color: #ffffff;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.vehicle-pill-btn.active .pill-info strong {
+  color: #ffffff;
+}
+
+.vehicle-pill-btn .pill-info small {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+  line-height: 1.2;
+}
+
+/* Lista de Cards de Serviços */
+.pricing-cards-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.service-item-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.service-item-card:hover {
+  border-color: var(--border-red);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.service-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.service-card-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.service-card-price {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 900;
+  color: var(--red-primary);
+  white-space: nowrap;
+}
+
+.service-card-desc {
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin-bottom: 16px;
+  flex-grow: 1;
+}
+
+.service-card-action {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-schedule-service {
+  background: rgba(255, 38, 56, 0.12);
+  border: 1px solid var(--border-red);
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-schedule-service:hover {
+  background: var(--red-primary);
+  border-color: var(--red-primary);
+  box-shadow: 0 4px 15px var(--red-glow);
+}
+
+@media (max-width: 768px) {
+  .pricing-vehicle-selector {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .pricing-cards-list {
+    grid-template-columns: 1fr;
+  }
+  .service-item-card {
+    padding: 16px;
+  }
+  .service-card-top {
+    flex-direction: column;
+    gap: 4px;
+  }
+  .service-card-price {
+    font-size: 1.35rem;
+    margin-bottom: 6px;
+  }
 }
 
 .pricing-table-card {
@@ -821,7 +1015,7 @@ img {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
-  min-width: 650px;
+  min-width: 750px;
 }
 
 .pricing-table th, .pricing-table td {

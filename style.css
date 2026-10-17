@@ -2181,3 +2181,305 @@ body, * {
     padding: 4px 8px;
   }
 }
+
+/* ==========================================================================
+   PROCESSO EM 4 ETAPAS
+   ========================================================================== */
+.process-section {
+  padding: clamp(60px, 8vw, 95px) 0;
+  background: rgba(12, 14, 20, 0.4);
+}
+
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.process-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  position: relative;
+  transition: var(--transition);
+}
+
+.process-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-red);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.process-step-num {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.08);
+}
+
+.process-icon {
+  font-size: 2rem;
+  margin-bottom: 14px;
+  line-height: 1;
+}
+
+.process-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  color: #ffffff;
+}
+
+.process-card p {
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+@media (max-width: 992px) {
+  .process-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 580px) {
+  .process-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   SLIDER INTERATIVO DE ANTES & DEPOIS (ARRASTÁVEL)
+   ========================================================================== */
+.interactive-slider-container {
+  position: relative;
+  width: 100%;
+  height: clamp(300px, 42vw, 420px);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-card);
+  cursor: ew-resize;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.slider-base-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.slider-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  overflow: hidden;
+  border-right: 2px solid #ffffff;
+  pointer-events: none;
+}
+
+.slider-overlay-img-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.slider-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 44px;
+  margin-left: -22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: ew-resize;
+  z-index: 10;
+  touch-action: none;
+}
+
+.handle-line {
+  width: 2px;
+  flex-grow: 1;
+  background: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.handle-circle {
+  width: 36px;
+  height: 36px;
+  background: var(--red-primary);
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  box-shadow: 0 0 15px var(--red-glow-strong);
+  flex-shrink: 0;
+}
+
+.slider-drag-hint {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  pointer-events: none;
+  letter-spacing: 0.04em;
+  z-index: 5;
+}
+
+/* ==========================================================================
+   BADGES DE TEMPO & GARANTIA NOS CARDS
+   ========================================================================== */
+.service-meta-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.service-badge-time, .service-badge-warranty {
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+}
+
+.service-badge-time {
+  background: rgba(255, 255, 255, 0.06);
+  color: #cbd5e1;
+}
+
+.service-badge-warranty {
+  background: rgba(255, 38, 56, 0.12);
+  border: 1px solid var(--border-red);
+  color: #ff5261;
+}
+
+/* ==========================================================================
+   VITRINE INSTAGRAM @LRX_DETAIL
+   ========================================================================== */
+.instagram-showcase-section {
+  padding: clamp(60px, 8vw, 95px) 0;
+}
+
+.instagram-box {
+  background: linear-gradient(135deg, #161219 0%, #0d0e14 100%);
+  border: 1px solid rgba(225, 48, 108, 0.3);
+  border-radius: var(--radius-lg);
+  padding: clamp(24px, 4vw, 45px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 35px;
+  align-items: center;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 25px rgba(225, 48, 108, 0.12);
+}
+
+.insta-header-col h2 {
+  margin-top: 12px;
+  margin-bottom: 14px;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+}
+
+.insta-header-col p {
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.insta-preview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.insta-preview-card {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  height: 220px;
+}
+
+.insta-preview-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.insta-preview-card:hover img {
+  transform: scale(1.06);
+}
+
+.insta-tag {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(6px);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+}
+
+@media (max-width: 900px) {
+  .instagram-box {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   BOTÕES DE ROTA GPS (GOOGLE MAPS & WAZE)
+   ========================================================================== */
+.gps-route-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.btn-gps {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: #ffffff;
+  transition: var(--transition);
+}
+
+.btn-gps:hover {
+  background: var(--red-primary);
+  border-color: var(--red-primary);
+  color: #ffffff;
+  transform: translateY(-2px);
+}

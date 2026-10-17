@@ -138,31 +138,43 @@ const SERVICES_DATA = {
 const WHATSAPP_NUMBER = '5514991045318';
 const INSTAGRAM_URL = 'https://www.instagram.com/lrx_detail/';
 
-// Nomes e descrições dos serviços da oficina
+// Nomes, tempos e garantias dos serviços da oficina
 const SERVICES_METADATA = {
   lavagemDetalhada: {
     title: 'Lavagem Detalhada LRX',
-    desc: 'Pré-lavagem Snow Foam sem contato, limpeza de caixas de roda, remoção de piche, cerdas macias em emblemas, cera protetora de SiO2 e pretinho acetinado hidrofóbico.'
+    desc: 'Pré-lavagem Snow Foam sem contato, limpeza de caixas de roda, remoção de piche, cerdas macias em emblemas, cera protetora de SiO2 e pretinho acetinado hidrofóbico.',
+    duration: '⏱️ Pronto em ~1h30',
+    warranty: '✨ Proteção Hidrofóbica'
   },
   lavagemMotor: {
     title: 'Lavagem Técnica de Motor',
-    desc: 'Limpeza a vapor e pincelamento detalhado sem jatos de alta pressão. Aplicação de verniz protetor que impede o ressecamento de mangueiras e borrachas.'
+    desc: 'Limpeza a vapor e pincelamento detalhado sem jatos de alta pressão. Aplicação de verniz protetor que impede o ressecamento de mangueiras e borrachas.',
+    duration: '⏱️ Pronto em ~1h',
+    warranty: '🛡️ Verniz Térmico Seguro'
   },
   higienizacaoInterna: {
     title: 'Higienização Interna & Oxi-Sanitização',
-    desc: 'Extração profunda de sujeiras em bancos, carpetes e teto. Limpeza técnica de painel e portas com proteção UV e eliminação total de odores e ácaros.'
+    desc: 'Extração profunda de sujeiras em bancos, carpetes e teto. Limpeza técnica de painel e portas com proteção UV e eliminação total de odores e ácaros.',
+    duration: '⏱️ Pronto em ~3h',
+    warranty: '🦠 Laudo Anti-Bactericida'
   },
   revitalizacaoFarois: {
     title: 'Restauração de Faróis com Proteção UV',
-    desc: 'Lixamento ótico em 4 etapas e polimento para remover todo amarelado e opacidade. Aplicação de selante com bloqueador solar contra novos danos.'
+    desc: 'Lixamento ótico em 4 etapas e polimento para remover todo amarelado e opacidade. Aplicação de selante com bloqueador solar contra novos danos.',
+    duration: '⏱️ Pronto em ~1h30',
+    warranty: '🛡️ Garantia de 1 Ano'
   },
   polimentoComercial: {
     title: 'Polimento Técnico Comercial',
-    desc: 'Eliminação de micro-riscos (swirl marks de lava-rápido de rua), devolução do reflexo de espelho original e selante protetor duradouro por 6 meses.'
+    desc: 'Eliminação de micro-riscos (swirl marks de lava-rápido de rua), devolução do reflexo de espelho original e selante protetor duradouro por 6 meses.',
+    duration: '⏱️ Execução em 1 Dia',
+    warranty: '🛡️ Selante 6 Meses'
   },
   vitrificacaoPintura: {
     title: 'Vitrificação Cerâmica 9H',
-    desc: 'Nano blindagem cerâmica com repelência extrema à água, fezes de aves e sujeira da estrada. Brilho vitrificado permanente com garantia de 1 a 2 anos.'
+    desc: 'Nano blindagem cerâmica com repelência extrema à água, fezes de aves e sujeira da estrada. Brilho vitrificado permanente com garantia de 1 a 2 anos.',
+    duration: '⏱️ Execução em 1 a 2 Dias',
+    warranty: '🏆 Certificado de 2 Anos'
   }
 };
 
@@ -181,7 +193,49 @@ document.addEventListener('DOMContentLoaded', () => {
   initSecurityLocks(); // Bloqueio de copiar, colar e console
   selectPricingVehicle('hatch'); // Inicializa tabela de serviços organizada
   initFoamBubbles(); // Inicia efeito de bolhas animadas de Snow Foam
+  initBeforeAfterSlider(); // Inicia slider interativo arrastável de antes/depois
 });
+
+// Slider Interativo de Antes e Depois (Arrastável)
+function initBeforeAfterSlider() {
+  const container = document.getElementById('before-after-slider-box');
+  const handle = document.getElementById('slider-handle');
+  const overlay = document.getElementById('slider-overlay-img');
+  if (!container || !handle || !overlay) return;
+
+  let isDragging = false;
+
+  function setSliderPosition(x) {
+    const rect = container.getBoundingClientRect();
+    let pos = ((x - rect.left) / rect.width) * 100;
+    if (pos < 0) pos = 0;
+    if (pos > 100) pos = 100;
+
+    handle.style.left = `${pos}%`;
+    overlay.style.width = `${pos}%`;
+  }
+
+  // Mouse Events
+  handle.addEventListener('mousedown', () => isDragging = true);
+  window.addEventListener('mouseup', () => isDragging = false);
+  window.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    setSliderPosition(e.clientX);
+  });
+
+  // Touch Events (Celular)
+  handle.addEventListener('touchstart', () => isDragging = true, { passive: true });
+  window.addEventListener('touchend', () => isDragging = false);
+  window.addEventListener('touchmove', (e) => {
+    if (!isDragging || !e.touches[0]) return;
+    setSliderPosition(e.touches[0].clientX);
+  }, { passive: true });
+
+  // Clique direto no container
+  container.addEventListener('click', (e) => {
+    setSliderPosition(e.clientX);
+  });
+}
 
 // Gerador de Bolhas de Espuma Snow Foam Animadas
 function initFoamBubbles() {
@@ -227,7 +281,13 @@ function selectPricingVehicle(type) {
     return `
       <div class="service-item-card">
         <div class="service-card-top">
-          <h3 class="service-card-title">${meta.title}</h3>
+          <div>
+            <h3 class="service-card-title">${meta.title}</h3>
+            <div class="service-meta-badges">
+              <span class="service-badge-time">${meta.duration}</span>
+              <span class="service-badge-warranty">${meta.warranty}</span>
+            </div>
+          </div>
           <div class="service-card-price">R$ ${price.toFixed(2).replace('.', ',')}</div>
         </div>
         <p class="service-card-desc">${meta.desc}</p>

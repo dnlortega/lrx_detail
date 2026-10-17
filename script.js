@@ -180,7 +180,33 @@ document.addEventListener('DOMContentLoaded', () => {
   loadCartFromStorage();
   initSecurityLocks(); // Bloqueio de copiar, colar e console
   selectPricingVehicle('hatch'); // Inicializa tabela de serviços organizada
+  initFoamBubbles(); // Inicia efeito de bolhas animadas de Snow Foam
 });
+
+// Gerador de Bolhas de Espuma Snow Foam Animadas
+function initFoamBubbles() {
+  const container = document.getElementById('foam-bubbles-box');
+  if (!container) return;
+
+  const bubbleCount = 16;
+  for (let i = 0; i < bubbleCount; i++) {
+    const bubble = document.createElement('div');
+    bubble.className = 'foam-bubble';
+    
+    const size = Math.floor(Math.random() * 26) + 12; // 12px a 38px
+    const left = Math.floor(Math.random() * 98); // 0% a 98%
+    const duration = (Math.random() * 5 + 6).toFixed(1); // 6s a 11s
+    const delay = (Math.random() * 6).toFixed(1); // 0s a 6s
+    
+    bubble.style.width = `${size}px`;
+    bubble.style.height = `${size}px`;
+    bubble.style.left = `${left}%`;
+    bubble.style.animationDuration = `${duration}s`;
+    bubble.style.animationDelay = `${delay}s`;
+    
+    container.appendChild(bubble);
+  }
+}
 
 // Renderização dos Serviços da Oficina
 function selectPricingVehicle(type) {

@@ -116,17 +116,17 @@ img {
     60deg,
     transparent 0%,
     rgba(255, 255, 255, 0.03) 40%,
-    rgba(255, 255, 255, 0.25) 50%,
+    rgba(255, 255, 255, 0.28) 50%,
     rgba(255, 255, 255, 0.03) 60%,
     transparent 100%
   );
   transform: rotate(25deg);
   pointer-events: none;
-  animation: shineStreak 6s infinite ease-in-out;
+  animation: shineStreak 5s infinite ease-in-out;
 }
 
 @keyframes shineStreak {
-  0%, 75% {
+  0%, 70% {
     left: -120%;
   }
   85%, 100% {
@@ -134,7 +134,104 @@ img {
   }
 }
 
-/* 2. Efeito Bolhas e Gotas Hidrofóbicas Flutuantes */
+/* 2. Efeito Bolhas e Gotas Hidrofóbicas Flutuantes (Snow Foam Animation) */
+.foam-bubbles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.foam-bubble {
+  position: absolute;
+  bottom: -20px;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.1) 40%, rgba(255, 38, 56, 0.15) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  animation: floatUp 8s infinite ease-in;
+  pointer-events: none;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(0.6);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.75;
+  }
+  80% {
+    opacity: 0.75;
+  }
+  100% {
+    transform: translateY(-500px) scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* 3. Ícones SVG de Veículos (Garantia de visualização da Picape sem erro de emoji) */
+.pill-svg-icon, .vehicle-icon-svg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.vehicle-pill-btn:hover .pill-svg-icon,
+.vehicle-pill-btn.active .pill-svg-icon {
+  color: var(--red-primary);
+  filter: drop-shadow(0 0 8px var(--red-glow));
+}
+
+.vehicle-radio-card input:checked + .vehicle-card-inner .vehicle-icon-svg {
+  color: var(--red-primary);
+  filter: drop-shadow(0 0 8px var(--red-glow));
+}
+
+/* 4. Badge Ao Vivo 'Oficina Aberta / Atendendo' */
+.live-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  color: #4ade80;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
+}
+
+.live-pulse-dot {
+  width: 8px;
+  height: 8px;
+  background: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #22c55e;
+  animation: livePulse 1.8s infinite;
+}
+
+@keyframes livePulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.4;
+  }
+}
+
 .water-droplet-badge {
   display: inline-flex;
   align-items: center;

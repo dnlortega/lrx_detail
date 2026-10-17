@@ -956,10 +956,31 @@ body, * {
   box-shadow: 0 0 20px var(--red-glow);
 }
 
-.vehicle-pill-btn .pill-emoji {
-  font-size: 1.8rem;
-  line-height: 1;
+.vehicle-pill-btn .pill-car-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: #cbd5e1;
   flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.vehicle-pill-btn:hover .pill-car-icon {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.vehicle-pill-btn.active .pill-car-icon {
+  color: #ffffff;
+  background: var(--red-primary);
+  border-color: var(--red-primary);
+  box-shadow: 0 0 15px var(--red-glow-strong);
 }
 
 .vehicle-pill-btn .pill-info {

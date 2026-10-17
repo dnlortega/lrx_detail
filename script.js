@@ -134,8 +134,37 @@ const SERVICES_DATA = {
   }
 };
 
-// Número de WhatsApp da Loja / Oficina
+// Configurações Oficiais LRX DETAIL
 const WHATSAPP_NUMBER = '5514991045318';
+const INSTAGRAM_URL = 'https://www.instagram.com/lrx_detail/';
+
+// Nomes e descrições dos serviços da oficina
+const SERVICES_METADATA = {
+  lavagemDetalhada: {
+    title: 'Lavagem Detalhada LRX',
+    desc: 'Pré-lavagem Snow Foam sem contato, limpeza de caixas de roda, remoção de piche, cerdas macias em emblemas, cera protetora de SiO2 e pretinho acetinado hidrofóbico.'
+  },
+  lavagemMotor: {
+    title: 'Lavagem Técnica de Motor',
+    desc: 'Limpeza a vapor e pincelamento detalhado sem jatos de alta pressão. Aplicação de verniz protetor que impede o ressecamento de mangueiras e borrachas.'
+  },
+  higienizacaoInterna: {
+    title: 'Higienização Interna & Oxi-Sanitização',
+    desc: 'Extração profunda de sujeiras em bancos, carpetes e teto. Limpeza técnica de painel e portas com proteção UV e eliminação total de odores e ácaros.'
+  },
+  revitalizacaoFarois: {
+    title: 'Restauração de Faróis com Proteção UV',
+    desc: 'Lixamento ótico em 4 etapas e polimento para remover todo amarelado e opacidade. Aplicação de selante com bloqueador solar contra novos danos.'
+  },
+  polimentoComercial: {
+    title: 'Polimento Técnico Comercial',
+    desc: 'Eliminação de micro-riscos (swirl marks de lava-rápido de rua), devolução do reflexo de espelho original e selante protetor duradouro por 6 meses.'
+  },
+  vitrificacaoPintura: {
+    title: 'Vitrificação Cerâmica 9H',
+    desc: 'Nano blindagem cerâmica com repelência extrema à água, fezes de aves e sujeira da estrada. Brilho vitrificado permanente com garantia de 1 a 2 anos.'
+  }
+};
 
 // Estado do Carrinho de Compras
 let cart = [];
@@ -149,7 +178,82 @@ document.addEventListener('DOMContentLoaded', () => {
   initFAQ();
   initMobileMenu();
   loadCartFromStorage();
+  initSecurityLocks(); // Bloqueio de copiar, colar e console
+  selectPricingVehicle('hatch'); // Inicializa tabela de serviços organizada
 });
+
+// Renderização dos Serviços da Oficina
+function selectPricingVehicle(type) {
+  const buttons = document.querySelectorAll('.vehicle-pill-btn');
+  buttons.forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-vehicle') === type);
+  });
+
+  const container = document.getElementById('pricing-services-list');
+  if (!container) return;
+
+  const vehicleData = SERVICES_DATA[type];
+  if (!vehicleData) return;
+
+  container.innerHTML = Object.keys(SERVICES_METADATA).map(key => {
+    const meta = SERVICES_METADATA[key];
+    const price = vehicleData.services[key];
+    return `
+      <div class="service-item-card">
+        <div class="service-card-top">
+          <h3 class="service-card-title">${meta.title}</h3>
+          <div class="service-card-price">R$ ${price.toFixed(2).replace('.', ',')}</div>
+        </div>
+        <p class="service-card-desc">${meta.desc}</p>
+        <div class="service-card-action">
+          <a href="https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Olá! Gostaria de agendar o serviço de *${meta.title}* para o meu veículo (*${vehicleData.name}* - R$ ${price.toFixed(2).replace('.', ',')}).`)}" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             class="btn-schedule-service">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+            Agendar Este
+          </a>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// Bloqueio de Copiar, Colar, Botão Direito e Console DevTools
+function initSecurityLocks() {
+  // Desativa clique com botão direito
+  document.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+  }, false);
+
+  // Desativa copiar, recortar e colar
+  ['copy', 'cut', 'paste'].forEach(evt => {
+    document.addEventListener(evt, (e) => {
+      e.preventDefault();
+    }, false);
+  });
+
+  // Desativa atalhos de desenvolvedor
+  document.addEventListener('keydown', (e) => {
+    if (
+      e.key === 'F12' || 
+      (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) ||
+      (e.ctrlKey && (e.key === 'U' || e.key === 'u' || e.key === 'S' || e.key === 's'))
+    ) {
+      e.preventDefault();
+      return false;
+    }
+  });
+
+  // Limpeza de Console e Aviso de Proteção
+  try {
+    setInterval(() => {
+      console.clear();
+      console.log('%cLRX DETAIL', 'color: #ff2638; font-size: 24px; font-weight: bold;');
+      console.log('%cAcesso restrito. Não execute códigos de terceiros nesta área.', 'color: #ffffff; font-size: 13px;');
+    }, 1500);
+  } catch (err) {}
+}
 
 // Renderização dos Produtos
 function renderProducts(filter) {
